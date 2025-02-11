@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #ff4b5c;
+            --background-light: #f8fafc;
+            --text-dark: #1e293b;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-light);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .checkout-container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .section {
+            padding: 15px;
+            border-radius: 8px;
+            background: white;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .section h3 {
+            margin: 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+            color: var(--text-dark);
+        }
+
+        .info {
+            padding: 10px 0;
+            font-size: 1rem;
+        }
+
+        .order-summary {
+            border-top: 2px solid var(--primary-color);
+            padding-top: 10px;
+        }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .order-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            box-shadow: var(--shadow);
+        }
+
+        .order-item h4 {
+            flex: 1;
+            margin: 0 15px;
+            color: var(--text-dark);
+        }
+
+        .price-summary {
+            padding: 15px 0;
+            font-size: 1rem;
+        }
+
+        .price-summary div {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .total {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+        }
+
+        .continue-btn {
+            width: 100%;
+            background: var(--primary-color);
+            color: white;
+            font-size: 1.2rem;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            font-weight: bold;
+            text-decoration: none;
+            display: block;
+            margin-top: 20px;
+            text-transform: uppercase;
+            transition: 0.3s ease;
+        }
+
+        .continue-btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="checkout-container">
+        <h2>Checkout</h2>
+
+        <div class="section">
+            <h3>Login </h3>
+            <p class="info"><strong>{{ user_data.first }} {{ user_data.last }}</strong> - {{ user_data.m_number }}</p>
+        </div>
+
+        <div class="section">
+            <h3>Delivery Address </h3>
+            <p class="info"><strong>{{ user_data.first }} {{ user_data.last }}</strong>, {{ user_data.address }}</p>
+        </div>
+
+        <div class="section order-summary">
+            <h3>Order Summary</h3>
+            {% for item in cart_items %}
+            <div class="order-item">
+                <img src="{{ item.image_url }}" alt="Product">
+                <h4>{{ item.name }}</h4>
+                <p>₹{{ item.price }} x {{ item.quantity }}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="section">
+            <h3>Price Details</h3>
+            <div class="price-summary">
+                <div><span>Price ({{ total_quantity }} item)</span> <span>₹{{ total_price }}</span></div>
+                <div><span>Delivery Charges</span> <span>{% if delivery_charge == 0 %} <del>₹40</del> Free {% else %} ₹40 {% endif %}</span></div>
+                <div><span>Packaging Charge</span> <span>₹{{ packaging_charge }}</span></div>
+                <div class="total"><span>Total Payable</span> <span>₹{{ total_payable }}</span></div>
+            </div>
+        </div>
+
+        <form method="POST" action="{{ url_for('checkout') }}">
+            <button type="submit" class="continue-btn">Continue</button>
+        </form>
+    </div>
+
+</body>
+</html>
