@@ -372,9 +372,55 @@
         </div>
 
         <div class="gift-cards-section" id="gift-cards-section">
-            <h2>Gift Cards</h2>
-            <!-- Add your gift cards content here -->
-            <p>Gift cards will be displayed here.</p>
+           <div class="giftcard-container">
+        <h2>Buy a Gift Card</h2>
+
+        <form method="POST" action="{{ url_for('gift_card') }}">
+            <div class="input-group">
+                <label>Receiver’s Email ID *</label>
+                <input type="email" name="receiver_email" required>
+            </div>
+
+            <div class="input-group">
+                <label>Receiver’s Name *</label>
+                <input type="text" name="receiver_name" required>
+            </div>
+
+            <div class="input-group">
+                <label>Card Value in ₹ *</label>
+                <select name="card_value" required>
+                    <option value="">Select</option>
+                    <option value="100">₹100</option>
+                    <option value="200">₹200</option>
+                    <option value="500">₹500</option>
+                    <option value="1000">₹1000</option>
+                    <option value="2000">₹2000</option>
+                    <option value="5000">₹5000</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>No of Cards</label>
+                <input type="number" name="num_cards" value="1" min="1">
+            </div>
+
+            <div class="input-group">
+                <label>Gifter’s Name (Optional)</label>
+                <input type="text" name="gifter_name">
+            </div>
+
+            <div class="input-group">
+                <label>Write a message (Optional, 100 characters)</label>
+                <textarea name="message" maxlength="100"></textarea>
+            </div>
+
+            <div class="giftcard-box">
+                Gift Card Value ₹<span id="total-value">0</span>
+            </div>
+
+            <button type="submit" class="btn-buy">BUY GIFT CARD FOR ₹<span id="total-amount">0</span></button>
+        </form>
+    </div>
         </div>
 
         <div class="saved-upi-section" id="saved-upi-section">
