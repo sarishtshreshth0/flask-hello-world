@@ -309,7 +309,6 @@ def add_to_wishlist():
     product_name = request.form.get("product_name")
     product_price = request.form.get("product_price")
     product_image = request.form.get("product_image")
-    existing_item = db_wishlist.find_one({"username": username, "product_id": product_id})
     db_wishlist.insert_one({
         "username": username,
         "product_id": product_id,
