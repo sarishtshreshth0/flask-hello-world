@@ -327,5 +327,54 @@ def wishlist():
     return render_template("wishlist.html", wishlist_items=db_wishlist_items)
 
 
+@app.route("/checkout", methods=['GET', 'POST'])
+def checkout():
+    if 'username' not in session:
+        return redirect(url_for("login"))
+    username = session['username']
+    cart_items = list(db_cart.find({"username": username}))
+    if not cart_items:
+        return redirect(url_for("cart"))
+    total_price = 0
+    total_quantity = 0
+    for item in cart_items:
+        total_price += (item["price"] * item["quantity"])
+        total_quantity += item["quantity"]
+    if total_price < 1000:
+        delivery_charge = 40
+    else:
+        delivery_charge = 0
+    packaging_charge = 59
+    total_payable = total_price + packaging_charge
+    user_data = db['user'].find_one({"email": username})
+
+    if request.method == "POST":
+        order_data = {
+            "username": username,
+            "cart_items": cart_items,
+            "total_price": total_price,
+            "total_quantity": total_quantity,
+            "delivery_charge": delivery_charge,
+            "packaging_charge": packaging_charge,
+            "total_payable": total_payable,
+            "address": user_data.get("address", "Not Provided"),
+            "contact": user_data.get("m_number"),
+            "status": "Order Placed"
+        }
+        db_orders.insert_one(order_data)
+        db_cart.delete_many({"username": username})
+        return redirect(url_for("orders"))
+
+    return render_template(
+        "checkout.html",
+        cart_items=cart_items,
+        total_price=total_price,
+        delivery_charge=delivery_charge,
+        packaging_charge=packaging_charge,
+        total_payable=total_payable,
+        user_data=user_data
+    )
+    
+
 if __name__ == '__main__':
     app.run(debug=True)
