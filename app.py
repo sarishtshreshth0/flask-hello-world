@@ -132,7 +132,8 @@ def home():
     else:
         name = "Login"
     session['name'] = name
-    return render_template("index.html",name = name)
+    product = list(db_product.find())
+    return render_template("index.html",name = name,products = product)
 
 @app.route("/contact",methods = ['GET', 'POST'])
 def contact():
