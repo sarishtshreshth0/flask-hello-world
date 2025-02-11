@@ -271,7 +271,7 @@ def add_to_cart():
             "username": username,
             "product_id": product_id,
             "name": product_name,
-            "price": float(product_price),
+            "price": product_price,
             "image_url": product_image,
             "quantity": 1
         })
@@ -294,7 +294,7 @@ def cart():
             if cart_item and cart_item["quantity"] > 1:
                 db_cart.update_one({"username": username, "product_id": product_id}, {"$inc": {"quantity": -1}})
             else:
-                db_cart.delete_one({"username": username, "product_id": product_id})  # Remove if quantity reaches 0
+                db_cart.delete_one({"username": username, "product_id": product_id})
         return redirect(url_for("cart"))
     cart_items = list(db_cart.find({"username": username}))
     return render_template("cart.html", cart_items=cart_items)
