@@ -310,16 +310,13 @@ def add_to_wishlist():
     product_price = request.form.get("product_price")
     product_image = request.form.get("product_image")
     existing_item = db_wishlist.find_one({"username": username, "product_id": product_id})
-    if existing_item:
-        db_wishlist.update_one({"username": username, "product_id": product_id})
-    else:
-        db_wishlist.insert_one({
-            "username": username,
-            "product_id": product_id,
-            "name": product_name,
-            "price": product_price,
-            "image_url": product_image
-        })
+    db_wishlist.insert_one({
+        "username": username,
+        "product_id": product_id,
+        "name": product_name,
+        "price": product_price,
+        "image_url": product_image
+    })
     return redirect(url_for("product_list"))
 
 
