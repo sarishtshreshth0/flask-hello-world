@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #eb2525;
+            --background-light: #f8fafc;
+            --text-dark: #1e293b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-light);
+            padding: 20px;
+        }
+
+        .cart-section {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-section h2 {
+            text-align: center;
+            color: var(--text-dark);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .cart-item img {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+        }
+
+        .cart-item h3 {
+            flex: 1;
+            margin: 0 20px;
+            color: var(--text-dark);
+        }
+
+        .quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            border: none;
+        }
+
+        .increase-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .decrease-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .remove-btn {
+            background-color: #ff0000;
+            color: white;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 10px;
+            font-size: 1.2rem;
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 20px;
+            display: block;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cart-section">
+        <h2>Your Cart</h2>
+
+        {% if cart_items %}
+            {% for item in cart_items %}
+                <div class="cart-item">
+                    <img src="{{ item['image_url'] }}" alt="Product Image">
+                    <h3>{{ item['name'] }}</h3>
+
+                    <div class="quantity">
+                        <form action="{{ url_for('cart') }}" method="POST">
+                            <input type="hidden" name="product_id" value="{{ item['product_id'] }}">
+                            <button type="submit" name="action" value="decrease" class="btn decrease-btn">−</button>
+                        </form>
+
+                        <span>{{ item['quantity'] }}</span>
+
+                        <form action="{{ url_for('cart') }}" method="POST">
+                            <input type="hidden" name="product_id" value="{{ item['product_id'] }}">
+                            <button type="submit" name="action" value="increase" class="btn increase-btn">+</button>
+                        </form>
+                    </div>
+
+                    <form action="{{ url_for('cart') }}" method="POST">
+                        <input type="hidden" name="product_id" value="{{ item['product_id'] }}">
+                        <button type="submit" name="action" value="remove" class="btn remove-btn">Remove</button>
+                    </form>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p style="text-align: center;">Your cart is empty.</p>
+        {% endif %}
+
+        {% if cart_items %}
+            <button class="checkout-btn">Proceed to Checkout</button>
+        {% endif %}
+    </div>
+
+</body>
+</html>
