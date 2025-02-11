@@ -143,11 +143,76 @@
             transform: scale(1.1);
         }
 
+        /* Banner Section */
+        .banner {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .banner img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        /* Product Options Section */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .product-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 15px;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .product-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 10px 0;
+            color: #333;
+        }
+        .product-card p {
+            font-size: 14px;
+            color: #666;
+            margin: 0 10px 10px;
+        }
+        .product-card .price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2874f0;
+            margin: 10px 0;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .search-bar {
                 width: 100%;
                 max-width: 100%;
+            }
+            .products {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             }
         }
     </style>
@@ -188,8 +253,6 @@
                         <p>Contact Us</p>
                     </a>
                 </div>
-
-
             </div>
         </nav>
     </header>
@@ -201,11 +264,9 @@
         <div class="topnav">
       <a href="/mobile" style="text-decoration: none; color: inherit;">
     <img src="https://rukminim1.flixcart.com/flap/80/80/image/22fddf3c7da4c4f4.png?q=100" alt="Mobile">
-
         <p>Mobile</p>
     </a>
     </div>
-
         <div class="topnav">
             <img src="https://rukminim1.flixcart.com/fk-p-flap/128/128/image/0d75b34f7d8fbcb3.png?q=100" alt="">
             <p>Fashion</p>
@@ -218,6 +279,23 @@
             <img src="https://rukminim1.flixcart.com/flap/128/128/image/ab7e2b022a4587dd.jpg?q=100" alt="">
             <p>Home & Furniture</p>
         </div>
+    </section>
+
+    <!-- Banner Section -->
+    <section class="banner">
+        <a href="https://ibb.co/G3Bd12Zm"><img src="https://i.ibb.co/BKdf7Zhk/Whats-App-Image-2025-02-11-at-19-27-01-f5a1409e-removebg-preview.png" alt="Whats-App-Image-2025-02-11-at-19-27-01-f5a1409e-removebg-preview" border="0"></a><br /><a target='_blank' href='https://usefulwebtool.com/fr/clavier-mathematique'></a><br />
+    </section>
+
+    <!-- Product Options Section -->
+    <section class="products">
+        {% for product in products %}
+        <div class="product-card">
+            <img src="{{product.image}}" alt="Product 1">
+            <h3>{{product.desc}}</h3>
+            <p>please buy it</p>
+            <p class="price">*FREE</p>
+        </div>
+        {% endfor %}
     </section>
 </body>
 </html>
