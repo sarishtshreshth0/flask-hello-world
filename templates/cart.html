@@ -7,49 +7,80 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #eb2525;
+            --primary-color: #ff4b5c;
+            --secondary-color: #ff9800;
             --background-light: #f8fafc;
             --text-dark: #1e293b;
+            --button-hover: #e63946;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: var(--background-light);
             padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
         }
 
         .cart-section {
             max-width: 800px;
-            margin: auto;
+            width: 100%;
             background: white;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .cart-section h2 {
             text-align: center;
             color: var(--text-dark);
+            margin-bottom: 30px;
+            font-size: 2rem;
+            font-weight: 600;
         }
 
         .cart-item {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 15px;
+            justify-content: space-between;
+            padding: 20px;
             border-bottom: 1px solid #e2e8f0;
+            transition: all 0.3s ease-in-out;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .cart-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
         .cart-item img {
-            width: 50px;
-            height: 50px;
-            border-radius: 5px;
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: var(--shadow);
         }
 
         .cart-item h3 {
             flex: 1;
             margin: 0 20px;
             color: var(--text-dark);
+            font-size: 1.2rem;
+            font-weight: 500;
         }
 
         .quantity {
@@ -59,12 +90,16 @@
         }
 
         .btn {
-            padding: 5px 10px;
+            padding: 8px 16px;
             font-size: 1rem;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
             border: none;
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .increase-btn {
@@ -72,28 +107,73 @@
             color: white;
         }
 
+        .increase-btn:hover {
+            background-color: var(--button-hover);
+            transform: scale(1.1);
+        }
+
         .decrease-btn {
+            background-color: #ff9800;
+            color: white;
+        }
+
+        .decrease-btn:hover {
+            background-color: #e68900;
+            transform: scale(1.1);
+        }
+
+        .remove-btn {
             background-color: #dc3545;
             color: white;
         }
 
-        .remove-btn {
-            background-color: #ff0000;
-            color: white;
+        .remove-btn:hover {
+            background-color: #b71c1c;
+            transform: scale(1.1);
         }
 
         .checkout-btn {
             width: 100%;
-            padding: 10px;
+            padding: 15px;
             font-size: 1.2rem;
-            background-color: green;
+            background-color: var(--secondary-color);
             color: white;
             border: none;
             cursor: pointer;
             text-align: center;
-            margin-top: 20px;
+            margin-top: 30px;
             display: block;
-            border-radius: 6px;
+            border-radius: 12px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .checkout-btn:hover {
+            background-color: #e68900;
+            transform: scale(1.05);
+            box-shadow: var(--shadow);
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: var(--text-dark);
+            font-size: 1.2rem;
+            padding: 20px;
+            font-weight: 500;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-item-actions form {
+            margin: 0;
+        }
+
+        .cart-item-actions .btn {
+            margin: 0;
         }
     </style>
 </head>
@@ -108,28 +188,30 @@
                     <img src="{{ item['image_url'] }}" alt="Product Image">
                     <h3>{{ item['name'] }}</h3>
 
-                    <div class="quantity">
+                    <div class="cart-item-actions">
+                        <div class="quantity">
+                            <form action="{{ url_for('cart') }}" method="POST">
+                                <input type="hidden" name="product_id" value="{{ item['product_id'] }}">
+                                <button type="submit" name="action" value="decrease" class="btn decrease-btn">−</button>
+                            </form>
+
+                            <span>{{ item['quantity'] }}</span>
+
+                            <form action="{{ url_for('cart') }}" method="POST">
+                                <input type="hidden" name="product_id" value="{{ item['product_id'] }}">
+                                <button type="submit" name="action" value="increase" class="btn increase-btn">+</button>
+                            </form>
+                        </div>
+
                         <form action="{{ url_for('cart') }}" method="POST">
                             <input type="hidden" name="product_id" value="{{ item['product_id'] }}">
-                            <button type="submit" name="action" value="decrease" class="btn decrease-btn">−</button>
-                        </form>
-
-                        <span>{{ item['quantity'] }}</span>
-
-                        <form action="{{ url_for('cart') }}" method="POST">
-                            <input type="hidden" name="product_id" value="{{ item['product_id'] }}">
-                            <button type="submit" name="action" value="increase" class="btn increase-btn">+</button>
+                            <button type="submit" name="action" value="remove" class="btn remove-btn">Remove</button>
                         </form>
                     </div>
-
-                    <form action="{{ url_for('cart') }}" method="POST">
-                        <input type="hidden" name="product_id" value="{{ item['product_id'] }}">
-                        <button type="submit" name="action" value="remove" class="btn remove-btn">Remove</button>
-                    </form>
                 </div>
             {% endfor %}
         {% else %}
-            <p style="text-align: center;">Your cart is empty.</p>
+            <p class="empty-cart">Your cart is empty.</p>
         {% endif %}
 
         {% if cart_items %}
