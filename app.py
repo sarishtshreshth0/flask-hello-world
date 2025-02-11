@@ -335,11 +335,11 @@ def checkout():
     cart_items = list(db_cart.find({"username": username}))
     if not cart_items:
         return redirect(url_for("cart"))
-    total_price = 0
+    total_price = 1000
     total_quantity = 0
-    for item in cart_items:
-        total_price += (item["price"] * item["quantity"])
-        total_quantity += item["quantity"]
+    # for item in cart_items:
+    #     total_price += (item["price"] * item["quantity"])
+    #     total_quantity += item["quantity"]
     if total_price < 1000:
         delivery_charge = 40
     else:
