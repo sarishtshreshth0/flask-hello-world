@@ -224,8 +224,6 @@ def product_list():
     return render_template("product_list_phone.html", products = product)
 
 
-
-
 @app.route("/searched", methods=['GET', 'POST'])
 def searched():
     search = request.args.get('query')
@@ -256,7 +254,8 @@ def searched():
             except AttributeError:
                 continue
 
-    return render_template("searched.html", products=product)@app.route("/add_to_cart", methods=['POST'])
+    return render_template("searched.html", products=product)
+@app.route("/add_to_cart", methods=['POST'])
 def add_to_cart():
     if 'username' not in session:
         return redirect(url_for("login"))
