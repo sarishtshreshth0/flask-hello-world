@@ -229,31 +229,23 @@ def searched():
     search = request.args.get('query')
     pages = 2
     product = []
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-    }
     for page in range(1, pages):
-        url = f"https://www.flipkart.com/search?q={search}&page={page}"
-        response = requests.get(url, headers=headers)
-        if response.status_code != 200:
+    url = f"https://www.flipkart.com/search?q={search}&page={page}"
+    html_url=urlopen(url).read()
+    html_box = bs(html_url, 'html.parser')
+    classes = ['gqcSqV YGE0gZ', "_4WELSP WH5SS-", "_4WELSP"]
+    follow = None
+    for class_name in classes:
+        follow = html_box.find_all('div', {'class': class_name})
+        if follow:
+            break
+
+    for item in follow:
+        try:
+            product.append({'image': item.img['src'], 'desc': item.img['alt']})
+            db_product.insert_one({'image': item.img['src'], 'desc': item.img['alt']})
+        except AttributeError:
             continue
-
-        html_box = bs(response.text, 'html.parser')
-        classes = ['gqcSqV YGE0gZ', "_4WELSP WH5SS-", "_4WELSP"]
-        follow = None
-
-        for class_name in classes:
-            follow = html_box.find_all('div', {'class': class_name})
-            if follow:
-                break
-
-        for item in follow:
-            try:
-                product.append({'image': item.img['src'], 'desc': item.img['alt']})
-                db_product.insert_one({'image': item.img['src'], 'desc': item.img['alt']})
-            except AttributeError:
-                continue
-
     return render_template("searched.html", products=product)
 @app.route("/add_to_cart", methods=['POST'])
 def add_to_cart():
