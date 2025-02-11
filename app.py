@@ -230,22 +230,23 @@ def searched():
     pages = 2
     product = []
     for page in range(1, pages):
-    url = f"https://www.flipkart.com/search?q={search}&page={page}"
-    html_url=urlopen(url).read()
-    html_box = bs(html_url, 'html.parser')
-    classes = ['gqcSqV YGE0gZ', "_4WELSP WH5SS-", "_4WELSP"]
-    follow = None
-    for class_name in classes:
-        follow = html_box.find_all('div', {'class': class_name})
-        if follow:
-            break
+        url = f"https://www.flipkart.com/search?q={search}&page={page}"
+        html_url=urlopen(url).read()
+        html_box = bs(html_url, 'html.parser')
+        classes = ['gqcSqV YGE0gZ', "_4WELSP WH5SS-", "_4WELSP"]
+        follow = None
+        for class_name in classes:
+            follow = html_box.find_all('div', {'class': class_name})
+            if follow:
+                break
 
-    for item in follow:
-        try:
-            product.append({'image': item.img['src'], 'desc': item.img['alt']})
-            db_product.insert_one({'image': item.img['src'], 'desc': item.img['alt']})
-        except AttributeError:
-            continue
+        for item in follow:
+            try:
+                product.append({'image': item.img['src'], 'desc': item.img['alt']})
+                print(product)
+                db_product.insert_one({'image': item.img['src'], 'desc': item.img['alt']})
+            except AttributeError:
+                continue
     return render_template("searched.html", products=product)
 @app.route("/add_to_cart", methods=['POST'])
 def add_to_cart():
