@@ -252,11 +252,11 @@ def searched():
         for item in follow:
             try:
                 product.append({'image': item.img['src'], 'desc': item.img['alt']})
+                db_product.insert_one({'image': item.img['src'], 'desc': item.img['alt']})
             except AttributeError:
                 continue
 
-    return render_template("searched.html", products=product)
-@app.route("/add_to_cart", methods=['POST'])
+    return render_template("searched.html", products=product)@app.route("/add_to_cart", methods=['POST'])
 def add_to_cart():
     if 'username' not in session:
         return redirect(url_for("login"))
