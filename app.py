@@ -374,6 +374,34 @@ def checkout():
         total_payable=total_payable,
         user_data=user_data
     )
+
+@app.route("/gift_card", methods=['GET', 'POST'])
+def gift_card():
+    if 'username' not in session:
+        return redirect(url_for("login"))
+
+    if request.method == "POST":
+        receiver_email = request.form.get("receiver_email")
+        receiver_name = request.form.get("receiver_name")
+        card_value = request.form.get("card_value")
+        card_id = random.choice(range(100000, 1000000))
+        cards = int(request.form.get("cards", 1))
+        gifter_name = request.form.get("gifter_name")
+        message = request.form.get("message")
+        total_amount = int(card_value) * cards
+        db_cards.insert_one({
+            "username": session['username'],
+            "receiver_email": receiver_email,
+            "receiver_name": receiver_name,
+            "card_value": int(card_value),
+            "card_id": card_id,
+            "num_cards": cards,
+            "gifter_name": gifter_name,
+            "message": message,
+            "total_amount": total_amount
+        })
+        return redirect(url_for("gift_card"))
+    return render_template('Profile_setting.html')
     
 
 if __name__ == '__main__':
