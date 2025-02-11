@@ -299,6 +299,43 @@ def cart():
     cart_items = list(db_cart.find({"username": username}))
     return render_template("cart.html", cart_items=cart_items)
 
+@app.route("/add_to_wishlist", methods=['POST'])
+def add_to_wishlist():
+    if 'username' not in session:
+        return redirect(url_for("login"))
+    username = session['username']
+    product_id = request.form.get("product_id")
+    product_name = request.form.get("product_name")
+    product_price = request.form.get("product_price")
+    product_image = request.form.get("product_image")
+    existing_item = db_wishlist.find_one({"username": username, "product_id": product_id})
+    if existing_item:
+        db_wishlist.update_one({"username": username, "product_id": product_id})
+    else:
+        db_wishlist.insert_one({
+            "username": username,
+            "product_id": product_id,
+            "name": product_name,
+            "price": product_price,
+            "image_url": product_image
+        })
+    return redirect(url_for("product_list"))
+
+
+@app.route("/wishlist", methods=['GET', 'POST'])
+def wishlist():
+    if 'username' not in session:
+        return redirect("/login")
+    username = session['username']
+    if request.method == "POST":
+        action = request.form.get("action")
+        product_id = request.form.get("product_id")
+        if action == "remove":
+            db_wishlist.delete_one({"username": username, "product_id": product_id})
+        return redirect(url_for("wishlist"))
+    db_wishlist_items = list(db_wishlist.find({"username": username}))
+    return render_template("wishlist.html", wishlist_items=db_wishlist_items)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
