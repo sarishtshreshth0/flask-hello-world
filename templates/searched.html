@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Listing Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            padding: 2rem;
+        }
+
+        .product-listing {
+            max-width: 1400px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eee;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .product-image:hover img {
+            transform: scale(1.1);
+        }
+
+        .product-title {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .price-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .current-price {
+            font-size: 1.6rem;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .original-price {
+            font-size: 1rem;
+            color: #888;
+            text-decoration: line-through;
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 1rem 0;
+            padding: 0;
+        }
+
+        .features-list li {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #eee;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .features-list li:hover {
+            background-color: #f8f9fa;
+        }
+
+        .buy-options {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .btn {
+            padding: 0.8rem 1.6rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease-in-out;
+            text-transform: uppercase;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .btn:hover::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .add-to-cart {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .buy-now {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .product-listing {
+                grid-template-columns: 1fr;
+            }
+
+            .product-image {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="product-listing">
+        {% for product in products %}
+        <div class="product-card">
+            <div class="product-image">
+                <img src="{{ product.image }}" alt="Product Image">
+            </div>
+            <h2 class="product-title">{{ product.desc }}</h2>
+            <div class="price-section">
+                <span class="current-price">$199.99</span>
+                <span class="original-price">$249.99</span>
+            </div>
+            <div class="buy-options">
+                <button class="btn add-to-cart">🛒 Add to Cart</button>
+                <button class="btn buy-now">💰 Buy Now</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

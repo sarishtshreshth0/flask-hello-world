@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raised Tickets</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f4f4f9, #e2e2f0);
+            color: #333;
+        }
+        h2 {
+            text-align: center;
+            color: #444;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+            transform: scale(1.02);
+            transition: transform 0.2s ease-in-out;
+        }
+        td {
+            color: #555;
+        }
+        .status {
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+        .status.resolved {
+            color: #28a745;
+        }
+        .status.pending {
+            color: #ffc107;
+        }
+        .status.closed {
+            color: #dc3545;
+        }
+        .raised-by {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .date {
+            font-style: italic;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <h2>Raised Tickets</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Ticket ID</th>
+                <th>Issue</th>
+                <th>Status</th>
+                <th>Raised By</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody id="ticketTableBody">
+            <!-- Tickets will be dynamically added here -->
+        </tbody>
+    </table>
+
+    <script>
+    const tickets = [
+        {% for raise in raised %}
+            { id: "{{ raise.Id }}", issue: "{{ raise.issue }}", status: "{{raise.status}}", raisedBy: "{{raise.raiseBy }}", date: "{{ raise.date }}" },
+        {% endfor %}
+    ];
+
+    const tableBody = document.getElementById("ticketTableBody");
+
+    tickets.forEach(ticket => {
+        const row = `<tr>
+            <td>${ticket.id}</td>
+            <td>${ticket.issue}</td>
+            <td class="status ${ticket.status.toLowerCase()}">${ticket.status}</td>
+            <td class="raised-by">${ticket.raisedBy}</td>
+            <td class="date">${ticket.date}</td>
+        </tr>`;
+        tableBody.innerHTML += row;
+    });
+    </script>
+</body>
+</html>

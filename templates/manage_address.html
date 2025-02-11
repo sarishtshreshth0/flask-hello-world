@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a New Address</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 500px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .button-location {
+            width: 100%;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+        .button-location:hover {
+            background: linear-gradient(135deg, #0056b3, #003d80);
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        .row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .row input, .row select {
+            width: 48%;
+        }
+        .address-type {
+            margin: 20px 0;
+        }
+        .address-type label {
+            margin-right: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+        .address-type input {
+            margin-right: 5px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .save {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+        .save:hover {
+            background: linear-gradient(135deg, #0056b3, #003d80);
+        }
+        .cancel {
+            background: transparent;
+            border: 1px solid #007bff;
+            color: #007bff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        .cancel:hover {
+            background: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="button-location" onclick="getLocation()">📍 Use my current location</button>
+
+<script>
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function (position) {
+                let lat = position.coords.latitude;
+                let lon = position.coords.longitude;
+
+                // Send coordinates to Flask backend
+                fetch(`/location?lat=${lat}&lon=${lon}`)
+                .then(response => response.json())
+                .then(data => {
+                    alert(`Location: ${data.City}, ${data.region}, ${data.Country} - ${data.pincode}`);
+                });
+            },
+            function (error) {
+                alert("Location access denied or unavailable.");
+            }
+        );
+    } else {
+        alert("Geolocation is not supported by your browser.");
+    }
+}
+</script>
+
+        <input type="text" placeholder="Name">
+        <input type="text" placeholder="10-digit mobile number">
+        <div class="row">
+            <input type="text" placeholder="Pincode">
+            <input type="text" placeholder="Locality">
+        </div>
+        <textarea placeholder="Address (Area and Street)"></textarea>
+        <div class="row">
+            <input type="text" placeholder="City/District/Town">
+            <select>
+                <option>--Select State--</option>
+                <option>State 1</option>
+                <option>State 2</option>
+            </select>
+        </div>
+        <div class="row">
+            <input type="text" placeholder="Landmark (Optional)">
+            <input type="text" placeholder="Alternate Phone (Optional)">
+        </div>
+        <div class="buttons" >
+            <button class="save">SAVE</button>
+            <button class="cancel">CANCEL</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Bramps</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co/s91mfhVg/Whats-App-Image-2025-02-07-at-18-07-30-8c2a4fa9-removebg-preview.png">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        body {
+            background-color: #f9f9f9;
+        }
+        header {
+            width: 100%;
+            height: 80px;
+            background: #fff;
+            box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        img {
+            width: 70px;
+            margin-right: 26px;
+        }
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 94%;
+            margin: 0 auto;
+        }
+        .nav-left, .nav-right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Updated Search Bar */
+        .search-bar {
+            width: 500px;
+            max-width: 80%;
+            height: 45px;
+            border-radius: 25px;
+            background: #f0eeee;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            transition: all 0.3s ease;
+            border: 1px solid #ddd;
+        }
+        .search-bar:hover, .search-bar:focus-within {
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+            border-color: #2874f0;
+        }
+        .search-bar input {
+            background: transparent;
+            border: none;
+            outline: none;
+            width: 90%;
+            font-size: 16px;
+            margin-left: 10px;
+            color: #333;
+        }
+        .search-bar input::placeholder {
+            color: #8d8d8d;
+        }
+        .search-bar i {
+            font-size: 18px;
+            color: #8d8d8d;
+        }
+
+        .nav-right div {
+            margin: 0 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .nav-right div:hover {
+            color: #2874f0;
+        }
+        .nav-right div i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        .nav-right div p {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .topnavbar {
+            height: 130px;
+            display: flex;
+            justify-content: center;
+            padding: 0px 20px;
+            border-bottom: 1px solid #e0e0e0;
+            background: #fff;
+            margin-top: 10px;
+        }
+        .topnav {
+            width: 80px;
+            height: 112px;
+            cursor: pointer;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .topnav img {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+        }
+        .topnav p {
+            font-weight: 510;
+            font-size: 14px;
+            color: #333;
+        }
+        .topnav:hover {
+            transform: translateY(-5px);
+        }
+        .topnav:hover p {
+            color: #2874f0;
+        }
+        .topnav:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .search-bar {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-left">
+                <img src="https://i.ibb.co/s91mfhVg/Whats-App-Image-2025-02-07-at-18-07-30-8c2a4fa9-removebg-preview.png" alt="Logo">
+            </div>
+            <div class="nav-right">
+                 <form class="search-bar" action="/searched" method="GET">
+        <i class="fas fa-search"></i>
+        <input type="text" id="search-input" name="query" placeholder="Search for products, brands, and more">
+        <button type="submit" style="display: none;"></button>
+    </form>
+                <div>
+                    <a href="/setting" style="text-decoration: none; color: inherit;">
+                    <i  class="fa-regular fa-user"></i>
+                    <p >{{name}} </p>
+                    </a>
+                </div>
+                <div>
+                    <i class="fa-regular fa-heart"></i>
+                    <p>Wishlist</p>
+                </div>
+                <div>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <p>Cart</p>
+                </div>
+                <div>
+                    <a href="/contact" style="text-decoration: none; color: inherit;">
+                        <i class="fa-solid fa-phone"></i>
+                        <p>Contact Us</p>
+                    </a>
+                </div>
+
+
+            </div>
+        </nav>
+    </header>
+    <section class="topnavbar">
+        <div class="topnav">
+            <img src="https://rukminim1.flixcart.com/flap/80/80/image/29327f40e9c4d26b.png?q=100" alt="">
+            <p>Grocery</p>
+        </div>
+        <div class="topnav">
+      <a href="/mobile" style="text-decoration: none; color: inherit;">
+    <img src="https://rukminim1.flixcart.com/flap/80/80/image/22fddf3c7da4c4f4.png?q=100" alt="Mobile">
+
+        <p>Mobile</p>
+    </a>
+    </div>
+
+        <div class="topnav">
+            <img src="https://rukminim1.flixcart.com/fk-p-flap/128/128/image/0d75b34f7d8fbcb3.png?q=100" alt="">
+            <p>Fashion</p>
+        </div>
+        <div class="topnav">
+            <img src="https://rukminim1.flixcart.com/flap/128/128/image/69c6589653afdb9a.png?q=100" alt="">
+            <p>Electronics</p>
+        </div>
+        <div class="topnav">
+            <img src="https://rukminim1.flixcart.com/flap/128/128/image/ab7e2b022a4587dd.jpg?q=100" alt="">
+            <p>Home & Furniture</p>
+        </div>
+    </section>
+</body>
+</html>

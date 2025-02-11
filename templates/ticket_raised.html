@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Raised</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co/s91mfhVg/Whats-App-Image-2025-02-07-at-18-07-30-8c2a4fa9-removebg-preview.png">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f3f4f6;
+            font-family: Arial, sans-serif;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        .icon {
+            color: green;
+            font-size: 50px;
+        }
+        .ticket-id {
+            background: #e5e7eb;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        .button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #3b82f6;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="icon">✔</div>
+        <h2>Ticket Raised Successfully!</h2>
+        <p>Your request has been submitted. We will get back to you shortly.</p>
+        <div class="ticket-id">Ticket ID: #{{Id}}</div>
+        <a href="/" class="button">Go to Dashboard</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 15px;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            display: block;
+            padding: 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            margin-left: 20px;
+        }
+
+        .order-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .order-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-header-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-status {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .status-delivered {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-processing {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+
+        .order-items {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        .order-items th {
+            background-color: #f8f9fa;
+            text-align: left;
+            padding: 10px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .order-items td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .total-price {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn-reorder {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-reorder:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-details {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-details:hover {
+            background-color: #5a6268;
+        }
+
+        /* Hidden Content */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <ul>
+                <li><a href="#" onclick="showContent('my-orders')">My Orders</a></li>
+                <li><a href="#" onclick="showContent('manage-address')">Manage Address</a></li>
+                <li><a href="#" onclick="showContent('upi-id')">UPI ID</a></li>
+                <li><a href="#" onclick="showContent('contact-us')">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- My Orders Content -->
+            <div id="my-orders" class="content-section">
+                <h1 class="order-header">My Orders</h1>
+
+                <!-- Order 1 -->
+                <div class="order-card">
+                    <div class="order-header-info">
+                        <div>
+                            <h3>Order #12345</h3>
+                            <p>Date: 2023-12-15</p>
+                        </div>
+                        <div>
+                            <span class="order-status status-delivered">Delivered</span>
+                        </div>
+                    </div>
+
+                    <table class="order-items">
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
+                        <tr>
+                            <td>Wireless Bluetooth Headphones</td>
+                            <td>1</td>
+                            <td>$99.99</td>
+                        </tr>
+                        <tr>
+                            <td>Smartphone Case</td>
+                            <td>2</td>
+                            <td>$15.00</td>
+                        </tr>
+                    </table>
+
+                    <div class="total-price">Total: $129.99</div>
+                    <button class="btn btn-reorder">Reorder</button>
+                    <button class="btn btn-details">View Details</button>
+                </div>
+
+                <!-- Order 2 -->
+                <div class="order-card">
+                    <div class="order-header-info">
+                        <div>
+                            <h3>Order #12346</h3>
+                            <p>Date: 2023-12-18</p>
+                        </div>
+                        <div>
+                            <span class="order-status status-processing">Processing</span>
+                        </div>
+                    </div>
+
+                    <table class="order-items">
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
+                        <tr>
+                            <td>Running Shoes</td>
+                            <td>1</td>
+                            <td>$120.00</td>
+                        </tr>
+                        <tr>
+                            <td>Sports Socks</td>
+                            <td>3</td>
+                            <td>$10.00</td>
+                        </tr>
+                    </table>
+
+                    <div class="total-price">Total: $150.00</div>
+                    <button class="btn btn-details">View Details</button>
+                </div>
+            </div>
+
+            <!-- Manage Address Content -->
+            <div id="manage-address" class="content-section hidden">
+                <h1 class="order-header">Manage Address</h1>
+                <p>This is where you can manage your addresses.</p>
+            </div>
+
+            <!-- UPI ID Content -->
+            <div id="upi-id" class="content-section hidden">
+                <h1 class="order-header">UPI ID</h1>
+                <p>This is where you can manage your UPI ID.</p>
+            </div>
+
+            <!-- Contact Us Content -->
+            <div id="contact-us" class="content-section hidden">
+                <h1 class="order-header">Contact Us</h1>
+                <p>This is the contact us page.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to handle content switching
+        function showContent(sectionId) {
+            // Hide all content sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // Show the selected section
+            const selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.classList.remove('hidden');
+            }
+        }
+
+        // Show "My Orders" by default
+        showContent('my-orders');
+    </script>
+</body>
+</html>

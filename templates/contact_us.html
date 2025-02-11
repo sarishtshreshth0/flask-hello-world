@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support | BRAMPS</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co/s91mfhVg/Whats-App-Image-2025-02-07-at-18-07-30-8c2a4fa9-removebg-preview.png">
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #2d3436;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: #fff;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        main:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+            position: relative;
+            font-size: 2.2rem;
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #3498db;
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+
+        .user-info {
+            background: #f8f9fa;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-left: 4px solid #3498db;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .user-info ion-icon {
+            font-size: 1.2rem;
+            color: #3498db;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 1.2rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            min-height: 150px;
+            background: #fcfcfc;
+        }
+
+        textarea:focus {
+            border-color: #3498db;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(52,152,219,0.1);
+            outline: none;
+        }
+
+        button {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52,152,219,0.3);
+        }
+
+        .tickets-section {
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .ticket-button {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+
+        .ticket-button:hover {
+            box-shadow: 0 5px 15px rgba(46,204,113,0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #2c3e50;
+            color: white;
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            main {
+                margin: 1.5rem;
+                padding: 1.5rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        .floating-icon {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #3498db;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(52,152,219,0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .floating-icon:hover {
+            transform: scale(1.1) rotate(15deg);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <div class="brand">
+                <img src="https://i.ibb.co/s91mfhVg/Whats-App-Image-2025-02-07-at-18-07-30-8c2a4fa9-removebg-preview.png" alt="Logo" class="brand-icon">
+                BRAMPS Support
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#contact"><ion-icon name="chatbubbles"></ion-icon>Contact</a></li>
+                    <li><a href="#raised-tickets"><ion-icon name="document-text"></ion-icon>Tickets</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="help">
+            <h1>How Can We Help You?</h1>
+            <p class="lead-text">Our dedicated support team is available 24/7 to assist with any inquiries or issues you may have.</p>
+        </section>
+
+        <section id="contact">
+            <form action="#" method="POST">
+                <div class="user-info">
+                    <ion-icon name="person-circle"></ion-icon>
+                    <span>{{name}}</span>
+                </div>
+                <div class="user-info">
+                    <ion-icon name="mail-open"></ion-icon>
+                    <span>{{email}}</span>
+                </div>
+
+                <label for="message" class="visually-hidden">Message</label>
+                <textarea
+                    id="message"
+                    name="message"
+                    placeholder="Describe your issue or question in detail..."
+                    required
+                ></textarea>
+
+                <button type="submit">
+                    <ion-icon name="send"></ion-icon>
+                    Send Message
+                </button>
+            </form>
+        </section>
+
+        <section class="tickets-section" id="raised-tickets">
+            <h2>Your Support Tickets</h2>
+            <p>Track the status of your submitted requests</p>
+            <button class="ticket-button" onclick="location.href='/raisedlist'">
+                <ion-icon name="folder-open"></ion-icon>
+                View All Tickets
+            </button>
+        </section>
+    </main>
+
+    <a href="#contact" class="floating-icon">
+        <ion-icon name="help-circle" style="color: white; font-size: 28px;"></ion-icon>
+    </a>
+
+    <footer>
+        <p>&copy; 2025 BRAMPS | Elevating Customer Experience</p>
+    </footer>
+
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+</body>
+</html>

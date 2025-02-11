@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co/s91mfhVg/Whats-App-Image-2025-02-07-at-18-07-30-8c2a4fa9-removebg-preview.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            overflow: hidden;
+        }
+
+        section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+        }
+
+        section .imgbx {
+            position: relative;
+            width: 70%;
+            height: 100%;
+        }
+
+        section .imgbx::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(225deg, #e91e63, #03a9f4);
+            z-index: 1;
+            mix-blend-mode: screen;
+        }
+
+        section .imgbx img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        section .contentbx {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        section .contentbx .formbx {
+            width: 50%;
+            max-width: 400px;
+        }
+
+        section .contentbx .formbx h2 {
+            color: #607d8b;
+            font-weight: 600;
+            font-size: 1.5em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border-bottom: 4px solid #ff4584;
+            display: inline-block;
+            letter-spacing: 1px;
+        }
+
+        section .contentbx .formbx .inputbx {
+            margin-bottom: 20px;
+        }
+
+        section .contentbx .formbx .inputbx span {
+            font-size: 16px;
+            margin-bottom: 5px;
+            display: inline-block;
+            color: #607d8b;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        section .contentbx .formbx .inputbx input {
+            width: 100%;
+            padding: 10px 20px;
+            outline: none;
+            font-weight: 400;
+            border: 1px solid #607d8b;
+            font-size: 16px;
+            letter-spacing: 1px;
+            color: #607d8b;
+            background: transparent;
+            border-radius: 30px;
+            transition: border-color 0.3s ease;
+        }
+
+        section .contentbx .formbx .inputbx input:focus {
+            border-color: #ff4584;
+        }
+
+        section .contentbx .formbx .inputbx input[type="submit"] {
+            background: #ff4584;
+            color: #fff;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        section .contentbx .formbx .inputbx input[type="submit"]:hover {
+            background: #f53677;
+        }
+
+        section .contentbx .formbx .remember {
+            margin-bottom: 10px;
+            color: #03a9f4;
+            font-weight: 400;
+            font-size: 14px;
+        }
+
+        section .contentbx .formbx .inputbx p {
+            color: #607d8b;
+        }
+
+        section .contentbx .formbx .inputbx p a {
+            color: #e91e63;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        section .contentbx .formbx .inputbx p a:hover {
+            color: #f53677;
+        }
+
+        @media (max-width: 768px) {
+            section .imgbx {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            section .contentbx {
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+                background: rgba(255, 255, 255, 0.95);
+            }
+
+            section .contentbx .formbx {
+                width: 90%;
+                padding: 20px;
+                margin: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="imgbx">
+            <img src="https://images.unsplash.com/photo-1589927986089-35812388d1f4" alt="Shopping Image">
+        </div>
+        <div class="contentbx">
+            <div class="formbx">
+                <h2>Login</h2>
+                <form method="POST">
+                    <div class="inputbx">
+                        <span>Email</span>
+                        <input type="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="inputbx">
+                        <span>Password</span>
+                        <input type="password" name="password" placeholder="Enter your password" required>
+                    </div>
+                    <div class="remember">
+                        <label>
+                            <input type="checkbox" name="remember"> Remember me
+                        </label>
+                    </div>
+                    <div class="inputbx">
+                        <input type="submit" value="Login" name="submit">
+                    </div>
+                    <div class="inputbx">
+                        <p>Don't have an account? <a href="/signup">Sign up</a></p>
+                    </div>
+                    <div class="inputbx">
+                        <p><a href="/reset-password">Forgot Password?</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
