@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay with PayPal</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0070ba, #00a8e8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .payment-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .payment-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        p {
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center; /* Center the button horizontally */
+        }
+        .paypal-button {
+            background: #003087;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .paypal-button:hover {
+            background: #001f5e;
+            transform: translateY(-3px);
+        }
+        .paypal-button i {
+            font-size: 24px;
+        }
+        .footer-text {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+        }
+        .footer-text a {
+            color: #0070ba;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <h2>Pay with PayPal</h2>
+        <p>Complete your payment securely using PayPal. Click the button below to proceed.</p>
+        <div class="button-container">
+            <button class="paypal-button" onclick="redirectToPayPal()">
+                <i class="fab fa-paypal"></i>
+                Pay with PayPal
+            </button>
+        </div>
+        <p class="footer-text">By proceeding, you agree to our <a href="#">Terms & Conditions</a>.</p>
+    </div>
+
+    <script>
+        function redirectToPayPal() {
+            // Redirect to your PayPal.me link
+            window.location.href = "https://paypal.me/sarishtshreshth0?country.x=IN&locale.x=en_GB";
+        }
+    </script>
+</body>
+</html>
