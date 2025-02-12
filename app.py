@@ -403,7 +403,10 @@ def gift_card():
         })
         return redirect(url_for("gift_card"))
     return render_template('Profile_setting.html')
-    
+
+@app.route("/paymentgateway",methods=['GET', 'POST'])
+def payment():
+    return render_template("payment_gateway.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
